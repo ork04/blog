@@ -5,10 +5,11 @@
     use yii\base\Model;
     use common\models\Users;
 
-    class SinginForm 
+    class SinginForm extends Model
     {
         public $login;
         public $password;
+        public $err = 0;
 
         public function rules(){
             return [

@@ -36,13 +36,9 @@ class BlogController extends Controller
         return $this->render('enter');
     }
 
-    /*public function actionSuccess(){
-        $model = new SinginForm();
-        return $this->render('success', ['model'=>$model]);
-    }*/
-
     public function actionSuccess(){
-        //if($model->load(\Yii::$app->request->post())){
+        $model = new SinginForm();
+        if($model->load(\Yii::$app->request->post())){
             if($model->validate()){
                 if($model->singin() ==1){
                     return $this->render('general');
@@ -52,9 +48,14 @@ class BlogController extends Controller
                     return $this->render('success', ['err'=>2]);
                 }
             }
-      //  }else{
-        //    return $this->render('success');
-       // }
+        }else{
+            return $this->render('success', ['model'=>$model]);
+        }
     }
+
+    public function actionGeneral(){
+        return render('general');
+    }
+
 }
 
