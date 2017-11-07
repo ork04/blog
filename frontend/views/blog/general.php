@@ -1,6 +1,6 @@
 <?php
     use yii\helpers\Html;
-?>
+
 $js = <<< JS
     $('.cr_art').click(function(){
         var html = '';
@@ -9,11 +9,16 @@ $js = <<< JS
         html += '<input type="text" placeholder="Введите название статьи">';
         html += '</div>';
         html += '<div>';
-        
+        html += '<textarea rows="15" cols="100"></textarea>';
         html += '</div>';
+        html += '<input type="submit" value="Сохранить">';
         html += '</form>';
+        $(this).after(html);
+        $(this).css('display','none');
+        $('.ar_info').css('display', 'none');
     });
 JS;
+$this->registerJs($js); ?>
     <div class='container'>
     <div class='row'>Поиск...</div>
     <div class='row'>
@@ -25,7 +30,7 @@ JS;
             <?=Html::button('Создать статью', ['class' => 'btn btn-default cr_art']) ?>
         </div>
     </div>
-        <div class='row'>
+        <div class='row ar_info'>
             <div class='col-md-4'> 
 
             </div>
