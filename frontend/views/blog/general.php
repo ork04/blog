@@ -1,12 +1,28 @@
 <?php
     use yii\helpers\Html;
 ?>
+$js = <<< JS
+    $('.cr_art').click(function(){
+        var html = '';
+        html += '<form>';
+        html += '<div class="form-group">';
+        html += '<input type="text" placeholder="Введите название статьи">';
+        html += '</div>';
+        html += '<div>';
+        
+        html += '</div>';
+        html += '</form>';
+    });
+JS;
     <div class='container'>
     <div class='row'>Поиск...</div>
     <div class='row'>
         <div class='btn-group'>
             <button type='button' class='btn btn-default'>Все статьи</button>
             <button type='button' class='btn btn-default'>Мои статьи</button>
+        </div>
+        <div style='margin-top: 20px;'>
+            <?=Html::button('Создать статью', ['class' => 'btn btn-default cr_art']) ?>
         </div>
     </div>
         <div class='row'>
