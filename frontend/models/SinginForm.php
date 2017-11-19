@@ -21,8 +21,10 @@
             $user = new Users();
             $user->login = $this->login;
             $user->password = $this->password;
-            $query = $user::find()->where('login=:login',[':login'=>$user->login])->andWhere('password=:password',[':password'=>$user->password])->count();
-            if($query) return $query;
+            $query = $user::find()->where('login=:login',[':login'=>$user->login])->andWhere('password=:password',[':password'=>$user->password])->asArray()->all();
+            if($query){;
+                return $query[0]['id'];
+            }
         }
     }
 ?>

@@ -10,6 +10,7 @@ use yii\filters\AccessControl;
 use frontend\models\RegistrationForm;
 use frontend\models\SinginForm;
 use frontend\models\Articles;
+use frontend\models\CreateArticleForm;
 
 /**
  * Site controller
@@ -37,13 +38,18 @@ class BlogController extends Controller
         $model = new SinginForm();
         if($model->load(\Yii::$app->request->post())){
             if($model->validate()){
-                if($model->singin() ==1){
-                    return $this->render('general');
+                if($model->singin() >=1){
+                        $cr_model = new CreateArticleForm();
+                    //return $this->render('general');
+                    return $this->render('general',[ 
+                        'user_id' => $model->singin(),
+                        'model' => $cr_model
+                        ]);
                 }elseif($model->singin() == 0){
                     return $this->render('enter', ['err'=>0]);
-                }else{ 
+                }/*else{ 
                     return $this->render('enter', ['err'=>2]);
-                }
+                }*/
             }
         }else{
             return $this->render('enter', ['model'=>$model]);
@@ -68,9 +74,20 @@ class BlogController extends Controller
     }
 
     public function actionGeneral(){
-        $articles = Articles::find();    
+        $articles = Articles::find()->all();
+        $model = new CreateArticleForm();
+        $create = 0;
+        if($model->load(\Yii::$app->request->post())){
+            if ($model->validate()){
+                if($model->create()){
+                    $create =1;
+                }
+            }
+        }    
         return $this->render('general',[
-                'articles'=>$articles
+                'articles'=>$articles, 
+                'model' => $model,
+                'create' => $create
                 ]);
     }
 
