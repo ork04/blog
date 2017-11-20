@@ -1,6 +1,7 @@
 <?php
     use yii\helpers\Html;
     use yii\bootstrap\ActiveForm;
+    use yii\web\Cookie;
 ?>
 <?php
 $js = <<< JS
@@ -28,6 +29,10 @@ $this->registerCss(".form{display: none;}");
 
         <div class='form'>
         <div class='form-group'>
+            <?php 
+                print $create;
+                print_r($error);
+            ?>
             <?php $form = ActiveForm::begin();?>
         </div>
             <?=$form->field($model,'title')->textInput()->label('Название статьи')?>
@@ -44,7 +49,7 @@ $this->registerCss(".form{display: none;}");
 
             </div>
             <div class='col-md-4'> 
-            <?php if(isset($articles)){?>
+            <?php if(!empty($articles)){?>
             <?foreach($articles as $article):?> 
                 <div><?=$article->article?></div>
             <?endforeach;?>

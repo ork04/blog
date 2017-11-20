@@ -12,7 +12,12 @@ class Articles extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
-
+    public $title;
+    public $descr;
+    public $user_id;
+    public $create_date;
+    
+    
     /**
      * @inheritdoc
      */
@@ -26,7 +31,7 @@ class Articles extends ActiveRecord implements IdentityInterface
      */
     public function behaviors()
     {
-        return [
+        return [/*
         'timestamp' => [
             'class' => '\yii\behaviors\TimestampBehavior',
             'attributes' => [
@@ -34,7 +39,7 @@ class Articles extends ActiveRecord implements IdentityInterface
                 ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
             ],
             'value' => new \yii\db\Expression('NOW()'),
-        ],
+        ],*/
     ];
     }
 

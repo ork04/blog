@@ -77,17 +77,23 @@ class BlogController extends Controller
         $articles = Articles::find()->all();
         $model = new CreateArticleForm();
         $create = 0;
+        $cookies = Yii::$app->request->cookies;
+        $user_id = $cookies->getValue('user_id');
         if($model->load(\Yii::$app->request->post())){
-            if ($model->validate()){
+            if ($model->validate()){print 'sadfasdf'; die();
                 if($model->create()){
                     $create =1;
                 }
+            }else{
+                $error = $model->errors;
             }
         }    
         return $this->render('general',[
                 'articles'=>$articles, 
                 'model' => $model,
-                'create' => $create
+                'create' => $create,
+                'user_id' => $user_id,
+                'error' => $error
                 ]);
     }
 
