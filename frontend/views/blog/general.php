@@ -14,7 +14,7 @@ $js = <<< JS
     });
 JS;
 $this->registerJs($js); 
-$this->registerCss(".form{display: none;}");
+$this->registerCss(".form{display: none;} ");
 ?>
     <div class='container'>
     <div class='row'>Поиск...</div>
@@ -44,12 +44,22 @@ $this->registerCss(".form{display: none;}");
             <div class='col-md-4'> 
 
             </div>
-            <div class='col-md-4'> 
-            <?php if(!empty($articles)){?>
-            <?php  print_r($articles);?>
-            <?foreach($articles as $article):?> 
-                <div><?=$article->article?></div>
-            <?endforeach;?>
+            <div class='row'> 
+            <?php if(!empty($articles)){ 
+            ?>
+            <div class='row'>
+                <?php for($i=0; $i<sizeof($articles); $i++):?>
+                <div class='col-md-2'>
+                    <div class='thumbnail'> 
+                        <img data-src='holder.js/300x200' alt='...'>
+                        <div class='caption'>
+                            <h3><?=$articles[$i]->title?></h3>
+                            <p><?=$articles[$i]->article?></p>
+                        </div>
+                    </div>
+                </div>
+                <?php endfor?>
+            </div>
             <?php }else{ ?>
                 <div>Статьи отсутствуют :(</div>
                 <div>Но вы можете создать свою статью</div>

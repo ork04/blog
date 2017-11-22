@@ -43,7 +43,8 @@ class BlogController extends Controller
                     //return $this->render('general');
                     return $this->render('general',[ 
                         'user_id' => $model->singin(),
-                        'model' => $cr_model
+                        'model' => $cr_model,
+                        'articles' => $articles = Articles::find()->all()
                         ]);
                 }elseif($model->singin() == 0){
                     return $this->render('enter', ['err'=>0, 'model' => $model]);

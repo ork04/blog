@@ -13,6 +13,7 @@
         public $descr;
         public $user_id;
         public $create_date;
+        public $visible;
 
         public function rules(){
             return [
@@ -26,6 +27,7 @@
             $article->article = $this->descr;
             $article->user_id =$this->user_id;
             $article->create_date = date('Y-m-d H:i:s');
+            $article->visible = 'Y';
 
             return $article->save();            
         }
