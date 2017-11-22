@@ -46,7 +46,7 @@ class BlogController extends Controller
                         'model' => $cr_model
                         ]);
                 }elseif($model->singin() == 0){
-                    return $this->render('enter', ['err'=>0]);
+                    return $this->render('enter', ['err'=>0, 'model' => $model]);
                 }/*else{ 
                     return $this->render('enter', ['err'=>2]);
                 }*/
@@ -77,15 +77,17 @@ class BlogController extends Controller
         $articles = Articles::find()->all();
         $model = new CreateArticleForm();
         $create = 0;
+        $error = '';
         $cookies = Yii::$app->request->cookies;
         $user_id = $cookies->getValue('user_id');
-        if($model->load(\Yii::$app->request->post())){
-            if ($model->validate()){print 'sadfasdf'; die();
-                if($model->create()){
+        if($model->load(\Yii::$app->request->post())){   
+            if ($model->validate()){
+                if($model->createArticle()){
                     $create =1;
                 }
             }else{
                 $error = $model->errors;
+                print_r($error); die();
             }
         }    
         return $this->render('general',[

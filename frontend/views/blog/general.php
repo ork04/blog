@@ -29,16 +29,12 @@ $this->registerCss(".form{display: none;}");
 
         <div class='form'>
         <div class='form-group'>
-            <?php 
-                print $create;
-                print_r($error);
-            ?>
             <?php $form = ActiveForm::begin();?>
         </div>
             <?=$form->field($model,'title')->textInput()->label('Название статьи')?>
-            <?=$form->field($model,'user_id')->hiddenInput(['value'=>$user_id, 'name'=> 'user_id'])->label(false) ?>
+            <?=$form->field($model,'user_id')->hiddenInput(['value'=>$user_id])->label(false)?>
         <div>
-            <?=Html::textarea('descr','Статья',['rows'=>15,'cols' =>100])?>
+            <?= $form->field($model, 'descr')->textarea(['rows' => '15', 'cols'=>'50']) ?>
         </div>
         <?=Html::submitButton('Сохранить', ['btn btn-primary'])?>
         <?php ActiveForm::end(); ?>
@@ -50,6 +46,7 @@ $this->registerCss(".form{display: none;}");
             </div>
             <div class='col-md-4'> 
             <?php if(!empty($articles)){?>
+            <?php  print_r($articles);?>
             <?foreach($articles as $article):?> 
                 <div><?=$article->article?></div>
             <?endforeach;?>

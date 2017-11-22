@@ -1,6 +1,7 @@
 <?php
     namespace frontend\models;
 
+
     use Yii;
     use yii\base\Model;
     use yii\db\ActiveRecord;
@@ -15,7 +16,7 @@
 
         public function rules(){
             return [
-                [['title','descr'], 'required'],
+                [['title','descr','user_id'], 'required'],
             ];
         }
 
@@ -25,7 +26,8 @@
             $article->article = $this->descr;
             $article->user_id =$this->user_id;
             $article->create_date = date('Y-m-d H:i:s');
-            return $article::save();            
+
+            return $article->save();            
         }
     }
 ?>
